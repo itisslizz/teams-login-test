@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
   public userInfo: any;
   public errorMessage: string;
   public successMessage: string;
+  public view:string = 'settings';
 
   constructor(private configService: ConfigService, private adalService: AdalService, private router: Router) { }
 
