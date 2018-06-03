@@ -1,3 +1,10 @@
-<p>
-  home works!
+<p *ngIf="userInfo">
+  Welcome {{userInfo.userName}}!
 </p>
+<p class="bg-danger" *ngIf="errorMessage">
+  {{errorMessage}}
+</p>
+<p class="bg-success" *ngIf="successMessage">
+  {{successMessage}}
+</p>
+<button class="btn btn-primary" *ngIf="!loggedIn" (click)="authenticate()">Login</button>

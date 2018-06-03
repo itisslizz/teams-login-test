@@ -20,11 +20,12 @@ export class ConfigurationComponent implements OnInit {
     MicrosoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
       MicrosoftTeams.settings.setSettings({
         entityId: "team",
-        contentUrl: "https://luware-teams-tab-test.azurewebsites.net",
+        contentUrl: "https://7c18c8b1.ngrok.io/",
         suggestedDisplayName: "Luware Team Manager",
         websiteUrl: "https://luware.com",
-        removeUrl: "https://luware-teams-tab-test.azurewebsites.net/remove"
+        removeUrl: "https://7c18c8b1.ngrok.io/remove"
       });
+      
       saveEvent.notifySuccess();
     });
 

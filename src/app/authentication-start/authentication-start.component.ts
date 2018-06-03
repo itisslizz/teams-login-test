@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdalService } from '../adal.service';
 
 @Component({
   selector: 'app-authentication-start',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthenticationStartComponent implements OnInit {
 
-  constructor() { }
+  constructor(private adalService: AdalService) { }
 
   ngOnInit() {
+    this.adalService.login();
   }
 
 }

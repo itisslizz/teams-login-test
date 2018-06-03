@@ -6,13 +6,17 @@ import { ConfigurationComponent } from './configuration/configuration.component'
 import { AppRoutingModule } from './/app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { AuthenticationStartComponent } from './authentication-start/authentication-start.component';
+import { AuthenticationEndComponent } from './authentication-end/authentication-end.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfigurationComponent,
     HomeComponent,
-    AuthenticationStartComponent
+    AuthenticationStartComponent,
+    AuthenticationEndComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

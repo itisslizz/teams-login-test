@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
-import 'expose-loader?AuthenticationContext!../../../node_modules/adal-angular/lib/adal.js'; 
+import { adal } from 'adal-angular';
+import * as AuthenticationContext from 'adal-angular/lib/adal.js'; 
 
 let createAuthContextFn: adal.AuthenticationContextStatic = AuthenticationContext;
 
@@ -15,6 +16,7 @@ export class AdalService {
 
   constructor(private configService: ConfigService) {
     this.config = configService.getAdalConfig;
+    this.context = new createAuthContextFn(this.config);
    }
 
    createAuthenticationContext(extraQueryParameters: string){
@@ -31,8 +33,13 @@ export class AdalService {
      this.context.logOut();
    }
 
-   handleCallback(){
-     this.context.handleWindowCallback();
+   handleCallback(hash: string){
+    if (!this.context.isCallback(hash))
+        return;
+
+    var requestInfo = this.context.getRequestInfo(hash);
+    if (requestInfo.valid)
+        this.context.saveTokenFromHash(requestInfo); //Save the token and user information. 
    }
 
    clearCache(){
@@ -43,6 +50,9 @@ export class AdalService {
      return this.context.getCachedUser();
    }
 
+   public get loginError(){
+     return this.context.getLoginError();
+   }
    public get accessToken(){
      return this.context.getCachedToken(this.configService.getAdalConfig.clientId);
    }
