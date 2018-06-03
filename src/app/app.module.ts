@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthenticationStartComponent } from './authentication-start/authentication-start.component';
 import { AuthenticationEndComponent } from './authentication-end/authentication-end.component';
 import { SettingsComponent } from './settings/settings.component';
+import { ReportingComponent } from './reporting/reporting.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SettingsComponent } from './settings/settings.component';
     HomeComponent,
     AuthenticationStartComponent,
     AuthenticationEndComponent,
-    SettingsComponent
+    SettingsComponent,
+    ReportingComponent
   ],
   imports: [
     BrowserModule,
