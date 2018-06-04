@@ -15,12 +15,13 @@ export class ConfigurationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    let component = this;
     MicrosoftTeams.initialize();
 
     MicrosoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
       MicrosoftTeams.settings.setSettings({
         entityId: "team",
-        contentUrl: "https:/luware-teams-tab-test.azurewebsites.net/",
+        contentUrl: "https://luware-teams-tab-test.azurewebsites.net/",
         suggestedDisplayName: "Luware Team Manager",
         websiteUrl: "https://luware.com",
         removeUrl: "https://luware-teams-tab-test.azurewebsites.net/remove"
@@ -30,8 +31,8 @@ export class ConfigurationComponent implements OnInit {
     });
 
     MicrosoftTeams.getContext( function (context){
-      this.tenantId = context.tid;
-      this.teamName = context.teamName; 
+      component.tenantId = context.tid;
+      component.teamName = context.teamName; 
     })
 
     this.tenantId = "onetwothree";
