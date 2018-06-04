@@ -8,6 +8,7 @@
   {{successMessage}}
 </p>
 <button class="btn btn-primary" *ngIf="!loggedIn" (click)="authenticate()">Login</button>
+<div id="content" *ngIf="loggedIn">
 <ul class="nav nav-tabs">
     <li role="presentation" [ngClass]="{'active' : view=='settings'}"><a class="clickable" (click)="view='settings'">Settings</a></li>
     <li role="presentation" [ngClass]="{'active' : view=='reporting'}"><a class="clickable" (click)="view='reporting'">Reporting</a></li>
@@ -15,3 +16,4 @@
 
 <app-settings *ngIf="view=='settings'"></app-settings>
 <app-reporting *ngIf="view=='reporting'"></app-reporting>
+</div>

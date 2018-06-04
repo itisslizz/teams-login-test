@@ -23,7 +23,7 @@ export class ConfigurationComponent implements OnInit {
         contentUrl: "https:/luware-teams-tab-test.azurewebsites.net/",
         suggestedDisplayName: "Luware Team Manager",
         websiteUrl: "https://luware.com",
-        removeUrl: "https://luware-teams-tab-test.azurewebsites.net/"
+        removeUrl: "https://luware-teams-tab-test.azurewebsites.net/remove"
       });
       
       saveEvent.notifySuccess();
