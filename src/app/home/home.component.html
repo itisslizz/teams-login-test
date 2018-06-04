@@ -9,8 +9,8 @@
 </p>
 <button class="btn btn-primary" *ngIf="!loggedIn" (click)="authenticate()">Login</button>
 <ul class="nav nav-tabs">
-    <li role="presentation" [ngClass]="{'active' : view=='settings'}"><a (click)="view='settings'">Settings</a></li>
-    <li role="presentation" [ngClass]="{'active' : view=='reporting'}"><a (click)="view='reporting'">Reporting</a></li>
+    <li role="presentation" [ngClass]="{'active' : view=='settings'}"><a class="clickable" (click)="view='settings'">Settings</a></li>
+    <li role="presentation" [ngClass]="{'active' : view=='reporting'}"><a class="clickable" (click)="view='reporting'">Reporting</a></li>
   </ul>
 
 <app-settings *ngIf="view=='settings'"></app-settings>
