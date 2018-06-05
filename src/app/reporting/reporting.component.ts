@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as MicrosoftTeams from '@microsoft/teams-js';
 
 @Component({
   selector: 'app-reporting',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportingComponent implements OnInit {
 
-  constructor() { }
+  public imagePath: string;
+  public teamName: string;
+
+  constructor() { 
+    this.imagePath = '/assets/images/reporting.png',
+    this.teamName = 'Team Name'
+  }
 
   ngOnInit() {
+    var component = this;
+    MicrosoftTeams.getContext((context) =>{
+      component.teamName = context.teamName;
+    })
   }
 
 }

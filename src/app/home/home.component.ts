@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit {
 
   loggedIn: boolean = false;
   upn: string = "";
+  teamName: string ="";
+
   public authenticate = () => {
     // Without Teams
     // this.router.navigateByUrl('authentication-start')
@@ -47,13 +49,13 @@ export class HomeComponent implements OnInit {
     MicrosoftTeams.initialize();
 
     MicrosoftTeams.getContext(function (context){
+      component.teamName = context.teamName;
       if (context.upn){
         component.upn = context.upn;
         component.adalService.createAuthenticationContext("scope=openid+profile&login_hint=" + encodeURIComponent(context.upn));
       } else {
         component.adalService.createAuthenticationContext("scope=openid+profile");
       }
-
       let user = component.adalService.userInfo;
       
       if (user && component.upn !== "") {

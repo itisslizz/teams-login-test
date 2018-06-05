@@ -3,8 +3,12 @@
 </h3>
 <div class="container">
   <div class="row">
-    <h4>HelpDesk Channel:</h4>
-    <h5>HelpDesk</h5>
+    <div class="form-group">
+      <label for="sel1">Help Desk Channel:</label>
+      <select class="form-control">
+        <option *ngFor="let channel of channels" [value]="channel">{{channel}}</option>
+      </select>
+    </div>
   </div>
   <div class="row">
     <h4>Team Members</h4>
@@ -12,8 +16,15 @@
       <thead>
         <th>Name</th><th>E-Mail</th><th>Active</th>
       </thead>
-      <tr>
-        <td>Marc Hueppin</td><td>mhueppin@luware.com</td><td>Inactive</td>
+      <tr *ngFor="let teamMember of teamMembers">
+        <td>{{teamMember.givenName}} {{teamMember.surname}}</td>
+        <td>{{teamMember.upn}}</td>
+        <td>
+          <label class="switch">
+            <input type="checkbox" [checked]="teamMember.active" (change)="teamMember.active = !teamMember.active">
+            <span class="slider round"></span>
+          </label>
+        </td>
       </tr>
     </table>
   </div>
