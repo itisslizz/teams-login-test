@@ -25,9 +25,8 @@ export class HomeComponent implements OnInit {
       url: window.location.origin + '/authentication-start',
       width: 600,
       height: 535,
-      successCallback: () => {
-        this.loadUser();
-        this.handleSuccess("Successfully logged in.");
+      successCallback: (token) => {
+        this.handleSuccess("Successfully logged in. with token" + token);
         this.loggedIn = true;
       },
 
@@ -48,36 +47,9 @@ export class HomeComponent implements OnInit {
     let component = this;
     MicrosoftTeams.initialize();
 
-    MicrosoftTeams.getContext(function (context){
-      component.teamName = context.teamName;
-      if (context.upn){
-        component.upn = context.upn;
-        component.adalService.createAuthenticationContext("scope=openid+profile&login_hint=" + encodeURIComponent(context.upn));
-      } else {
-        component.adalService.createAuthenticationContext("scope=openid+profile");
-      }
-      let user = component.adalService.userInfo;
-      
-      if (user && component.upn !== "") {
-        if (user.userName !== component.upn){
-          component.adalService.clearCache();
-        }
-      }
-  
-      let token = component.adalService.accessToken;
-      if (token) {
-        component.loggedIn = true;
-        component.loadUser();
-      } else {
-        // show login Button
-      }
-    });
+    MicrosoftTeams.getContext(function (context){});
   }
   
-  loadUser(){
-    this.userInfo = this.adalService.userInfo;
-  }
-
   handleFailure(reason){
     this.errorMessage = reason;
   }

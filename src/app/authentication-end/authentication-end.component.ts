@@ -12,16 +12,32 @@ export class AuthenticationEndComponent implements OnInit {
 
   constructor(private adalService: AdalService, private router: Router) { }
 
+  getHashParameters = function () {
+    let hashParams = {};
+    location.hash.substr(1).split("&").forEach(function(item) {
+        let s = item.split("="),
+        k = s[0],
+        v = s[1] && decodeURIComponent(s[1]);
+        hashParams[k] = v;
+    });
+    return hashParams;
+  }
+
   ngOnInit() {
     MicrosoftTeams.initialize();
-    this.adalService.handleCallback(window.location.hash);
-
-    if (this.adalService.userInfo) {
-      MicrosoftTeams.authentication.notifySuccess()
-    } else {
-        microsoftTeams.authentication.notifyFailure(this.adalService.loginError);
+    let hashParams = this.getHashParameters();
+    console.log(hashParams);
+    if (hashParams["error"]){
+      MicrosoftTeams.authentication.notifyFailure(hashParams["error"])
+    } else if(hashParams["id_token"]){
+      let expectedState = localStorage.getItem("simple.state");
+      if (expectedState !== hashParams["state"]){
+        
+        MicrosoftTeams.authentication.notifyFailure("StateDoesNotMatch");
+      } else {
+        MicrosoftTeams.authentication.notifySuccess(hashParams["id_token"]);
+      }
     }
-    this.router.navigateByUrl('/home');
   }
 
 }
